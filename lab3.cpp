@@ -15,26 +15,26 @@ public:
 
     double getPole() { return Pole; }
 
-    void id() { cout << "Figura, pole:" << Pole << endl; }
+    virtual void id() { cout << "Figura, pole:" << Pole << endl; }
 };
 
 class Kolo : public Figura
 {
 public:
     Kolo(double D) : Figura{0.25 * 3.14 * D * D} {}
-    void id() { cout << "Kolo, pole: " << Pole << endl; }
+    void id() override { cout << "Kolo, pole: " << Pole << endl; }
 };
 
 class Kwadrat : public Figura
 {
 public:
     Kwadrat(double A) : Figura{A * A} {}
-    void id() { cout << "Kwadrat, pole: " << Pole << endl; }
+    void id() override { cout << "Kwadrat, pole: " << Pole << endl; }
 };
 
-void id(Figura other)
+void id(const Figura& other)
 {
-    other.id();
+    return id(other);
 }
 int main()
 {
@@ -46,11 +46,6 @@ int main()
 
     id(B);
 
-    Kwadrat P{10};
+    B.id();
 
-    Figura D = static_cast< Figura >(P);
-
-    P.id();
-
-    D.id();
 }
