@@ -1,7 +1,17 @@
 #include <iostream>
 using namespace std;
 
-class Figura
+class BytGeometryczny
+{
+public:
+    BytGeometryczny() { cout << "Byt Geometryczny" << endl; };
+
+    void virtual id() { cout << "Funkcja void id w klasie Byt Geometryczny" << endl; };
+
+    virtual ~BytGeometryczny() { cout << "Byt Geometryczny usunięty" << endl; };
+};
+
+class Figura : public BytGeometryczny
 {
 protected:
     double Pole;
@@ -11,7 +21,7 @@ public:
 
     Figura(double a) { Pole = a; }
 
-    // void setPole(double a) { Pole = a; }
+    void setPole(double a) { Pole = a; }
 
     double getPole() { return Pole; }
 
@@ -39,13 +49,32 @@ public:
     ~Kwadrat() { cout << "Kwadrat deleted!" << endl; }
 };
 
+class WektorFigur : Figura
+{
+public:
+    WektorFigur(int ilosc)
+    {
+        cout << "nowy wektor figur" << endl;
+        Figura* tab[1000];
+
+        int licznik = 0;
+
+        for (int i = 0; i < ilosc; i++) {
+            tab[i] = new Figura(i);
+        };
+
+        for (int j = ilosc - 1; j < ilosc; j++) {
+            cout << "mamy " << j + 1 << " figur" << endl;
+        }
+    }
+};
 void id(const Figura& other)
 {
     return id(other);
 }
 int main()
 {
-    Kwadrat A{1.0};
+    /*Kwadrat A{1.0};
 
     Kolo B{2.0};
 
@@ -59,5 +88,15 @@ int main()
 
     kwadrat2->id();
 
-    delete f;
+    delete f;*/
+
+    // BytGeometryczny byt;
+
+    // byt.id();
+
+    // Figura figura{10};
+
+    // figura.id();
+
+    WektorFigur WF{2};
 }
