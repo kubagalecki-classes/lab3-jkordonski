@@ -14,9 +14,8 @@ public:
 class Figura : public BytGeometryczny
 {
 protected:
-    double Pole;
-
 public:
+    double Pole;
     Figura() { Pole = 0; }
 
     Figura(double a) { Pole = a; }
@@ -51,20 +50,48 @@ public:
 
 class WektorFigur : Figura
 {
+
 public:
-    WektorFigur(int ilosc)
+    int     liczbafigur = 1000;
+    Figura* tab[1000];
+
+    WektorFigur(int n = 0) : liczbafigur{n} {};
+
+    Figura* operator[](int i)
     {
-        cout << "nowy wektor figur" << endl;
-        Figura* tab[1000];
 
-        int licznik = 0;
+        if (i < liczbafigur)
+            return tab[i];
+        else
+            return nullptr;
+    };
 
-        for (int i = 0; i < ilosc; i++) {
-            tab[i] = new Figura(i);
-        };
+    void push(Figura* pointer)
+    {
+        tab[liczbafigur] = pointer;
+        liczbafigur++;
+    };
 
-        for (int j = ilosc - 1; j < ilosc; j++) {
-            cout << "mamy " << j + 1 << " figur" << endl;
+    void pop()
+    {
+        tab[liczbafigur - 1] = nullptr;
+        liczbafigur--;
+    };
+    void print()
+    {
+        for (int i = 0; i < liczbafigur; i++) {
+            cout << i << ". " << tab[i] << endl;
+        }
+    }
+
+    double& operator=(const Figura& other) { this->Pole = other.Pole; }
+
+    ~WektorFigur()
+    {
+        for (int i = 0; i < liczbafigur; i++) {
+            delete tab[i];
+
+            cout << "figura " << i << " destroyed!" << endl;
         }
     }
 };
@@ -99,4 +126,16 @@ int main()
     // figura.id();
 
     WektorFigur WF{2};
+
+    WF.print();
+
+    Figura* a1;
+
+    WF.push(a1);
+
+    WF.print();
+
+    WF.pop();
+
+    WF.print();
 }
