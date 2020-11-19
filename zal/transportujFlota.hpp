@@ -11,7 +11,7 @@ unsigned int transportujFlota(unsigned int towar)
     else
     {
       int ilosctowaru =0;
-    while (ilosctowaru < towar;)
+    while (ilosctowaru < towar)
     {
     Stocznia stocznia{};
     Statek* s1 = stocznia();
