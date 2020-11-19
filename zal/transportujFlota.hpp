@@ -10,12 +10,12 @@ unsigned int transportujFlota(unsigned int towar)
     {return 0;}
     else
     {
-      int ilosctowaru =0;
+    int ilosctowaru =0;
     while (ilosctowaru < towar)
     {
     Stocznia stocznia{};
     Statek* s1 = stocznia();
-    towar = towar + s1->transportuj();
+    ilosctowaru = ilosctowaru + s1->transportuj();
 
     if (s1 == dynamic_cast<Zaglowiec*>(s1))
     {zaglowce++;}
